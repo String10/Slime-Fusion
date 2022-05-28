@@ -17,7 +17,9 @@ import {
     CircleCollider2D,
     UITransform,
     ERigidBody2DType, 
-    PhysicsSystem2D} from 'cc';
+    PhysicsSystem2D
+} from 'cc';
+import { Element } from './Element';
 const { ccclass, property } = _decorator;
 
 @ccclass('MainGame')
@@ -41,7 +43,14 @@ export class MainGame extends Component {
 
     createElemCount: number = 0;
 
+    static instance: MainGame = null;
+
     onLoad() {
+        if (null != MainGame.instance) {
+            MainGame.instance.destroy();
+        }
+        MainGame.instance = this;
+
         PhysicsSystem2D.instance.enable = true;
     }
 
@@ -59,7 +68,7 @@ export class MainGame extends Component {
         var newElem = instantiate(this.elemPre);
         newElem.parent = this.topNode;
         newElem.getComponent(Sprite).spriteFrame = this.elemSprites[index];
-        newElem.getComponent('Element')!.elemNumber = index;
+        newElem.getComponent(Element).elemNumber = index;
 
         newElem.getComponent(RigidBody2D).type = ERigidBody2DType.Static
         newElem.getComponent(CircleCollider2D).radius = 0;
@@ -77,6 +86,29 @@ export class MainGame extends Component {
         ).call(function () {
             t.targetElem = newElem;
         }).start();
+    }
+
+    createLevelUpElem(index: number, positon: Vec3) {
+        let t = this, elem = instantiate(this.elemPre);
+        elem.parent = t.elemNode;
+        elem.getComponent(Sprite).spriteFrame = t.elemSprites[index];
+        elem.getComponent(Element).elemNumber = index;
+        elem.setPosition(positon);
+        elem.scale = new Vec3(0, 0, 0);
+
+        elem.getComponent(RigidBody2D).linearVelocity = new Vec2(0, 0);
+        elem.getComponent(CircleCollider2D).radius = elem.getComponent(UITransform).height / 2;
+        elem.getComponent(CircleCollider2D).apply();
+
+        let tweenDuration = 0.5;
+        tween(elem).to(tweenDuration,
+            {
+                scale: new Vec3(1, 1, 1),
+            },
+            {
+                easing: 'backOut',
+            }
+        ).start();
     }
 
     bindTouch() {
@@ -126,15 +158,7 @@ export class MainGame extends Component {
         this.targetElem.setParent(this.elemNode);
 
         this.scheduleOnce(function () {
-            switch (t.createElemCount) {
-                case 0:
-                    t.createOneElem(0), t.createElemCount++;
-                    break;
-                    
-                default:
-                    t.createOneElem(0), t.createElemCount++;
-                    break;
-            }
+            t.createOneElem(t.createElemCount % t.elemSprites.length), t.createElemCount++;
         }, scheduleOnceDelay);
     }
 }

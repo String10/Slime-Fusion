@@ -424,7 +424,7 @@
     "enabledContactListener": false,
     "bullet": false,
     "awakeOnLoad": true,
-    "_group": 1,
+    "_group": 4,
     "_type": 0,
     "_allowSleep": true,
     "_gravityScale": 1,
@@ -449,7 +449,7 @@
     "_enabled": true,
     "__prefab": null,
     "tag": 0,
-    "_group": 1,
+    "_group": 4,
     "_density": 1,
     "_sensor": false,
     "_friction": 0.2,
@@ -548,7 +548,7 @@
     "enabledContactListener": false,
     "bullet": false,
     "awakeOnLoad": true,
-    "_group": 1,
+    "_group": 4,
     "_type": 0,
     "_allowSleep": true,
     "_gravityScale": 1,
@@ -573,7 +573,7 @@
     "_enabled": true,
     "__prefab": null,
     "tag": 0,
-    "_group": 1,
+    "_group": 4,
     "_density": 1,
     "_sensor": false,
     "_friction": 0.2,
@@ -672,7 +672,7 @@
     "enabledContactListener": false,
     "bullet": false,
     "awakeOnLoad": true,
-    "_group": 1,
+    "_group": 4,
     "_type": 0,
     "_allowSleep": true,
     "_gravityScale": 1,
@@ -697,7 +697,7 @@
     "_enabled": true,
     "__prefab": null,
     "tag": 0,
-    "_group": 1,
+    "_group": 4,
     "_density": 1,
     "_sensor": false,
     "_friction": 0.2,
@@ -972,6 +972,10 @@
     "elemSprites": [
       {
         "__uuid__": "0bb522d9-06cd-47d7-a03d-d3f347cbd114@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "31dace28-6d8a-4c81-8e6b-971bb970683b@f9941",
         "__expectedType__": "cc.SpriteFrame"
       }
     ],
