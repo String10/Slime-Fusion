@@ -55,7 +55,10 @@ export class MainGame extends Component {
     }
 
     start() {
-        this.createOneElem(0);
+        //this.createOneElem(0);
+        this.scheduleOnce(function () {
+            this.createOneElem(Math.floor(MainGame.range(0, 3)) % this.elemSprites.length), this.createElemCount++;
+        }, 1.0);
 
         this.bindTouch()
     }
@@ -63,7 +66,7 @@ export class MainGame extends Component {
     update(deltaTime: number) {
 
     }
-
+    //创建一个史莱姆
     createOneElem(index: number) {
         var newElem = instantiate(this.elemPre);
         newElem.parent = this.topNode;
@@ -87,7 +90,7 @@ export class MainGame extends Component {
             t.targetElem = newElem;
         }).start();
     }
-
+    
     createLevelUpElem(index: number, positon: Vec3) {
         let t = this, elem = instantiate(this.elemPre);
         elem.parent = t.elemNode;
@@ -110,14 +113,14 @@ export class MainGame extends Component {
             }
         ).start();
     }
-
+    //绑定touch事件
     bindTouch() {
         this.node.on(Input.EventType.TOUCH_START, this.onTouchStart, this);
         this.node.on(Input.EventType.TOUCH_MOVE, this.onTouchMove, this);
         this.node.on(Input.EventType.TOUCH_END, this.onTouchEnd, this);
         this.node.on(Input.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
     }
-
+    
     onTouchStart(e: EventTouch) {
         if(null == this.targetElem) {
             return;
