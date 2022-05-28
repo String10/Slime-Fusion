@@ -1,4 +1,4 @@
-import { _decorator, Component, Collider2D, Contact2DType, IPhysics2DContact, tween, CircleCollider2D } from 'cc';
+import { _decorator, Component, CircleCollider2D, Contact2DType, IPhysics2DContact, tween, Collider2D } from 'cc';
 import { MainGame } from './MainGame';
 const { ccclass, property } = _decorator;
 
@@ -8,7 +8,7 @@ export class Element extends Component {
     elemNumber: number = 0;
 
     onLoad() {
-        let collider = this.getComponent(CircleCollider2D);
+        let collider = this.getComponent(Collider2D);
         collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
     }
 
@@ -21,8 +21,8 @@ export class Element extends Component {
     }
 
     onBeginContact(
-        selfCollider: CircleCollider2D,
-        otherCollider: CircleCollider2D,
+        selfCollider: Collider2D,
+        otherCollider: Collider2D,
         contact: IPhysics2DContact | null
     ) {
         if(otherCollider.group == selfCollider.group) {
@@ -39,10 +39,10 @@ export class Element extends Component {
             
             
             let newPos = otherCollider.node.getPosition();
-            otherCollider.node.getComponent(CircleCollider2D).radius = 0;
-            // otherCollider.node.getComponent(CircleCollider2D).apply();
-            selfCollider.node.getComponent(CircleCollider2D).radius = 0;
-            // selfCollider.node.getComponent(CircleCollider2D).apply();
+            //otherCollider.node.getComponent(Collider2D).radius = 0;
+            // otherCollider.node.getComponent(Collider2D).apply();
+            //selfCollider.node.getComponent(Collider2D).radius = 0;
+            // selfCollider.node.getComponent(Collider2D).apply();
             
             let tweenDuration = 0.1;
             tween(selfCollider.node).to(tweenDuration,

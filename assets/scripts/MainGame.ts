@@ -14,7 +14,7 @@ import {
     Camera,
     view,
     RigidBody2D,
-    CircleCollider2D,
+    Collider2D,
     UITransform,
     ERigidBody2DType, 
     PhysicsSystem2D
@@ -71,8 +71,8 @@ export class MainGame extends Component {
         newElem.getComponent(Element).elemNumber = index;
 
         newElem.getComponent(RigidBody2D).type = ERigidBody2DType.Static
-        newElem.getComponent(CircleCollider2D).radius = 0;
-        newElem.getComponent(CircleCollider2D).apply();
+        //newElem.getComponent(Collider2D).radius = 0;
+        newElem.getComponent(Collider2D).apply();
 
         newElem.scale = new Vec3(0, 0, 0);
         let tweenDuration:number = 0.2, t = this;
@@ -97,8 +97,8 @@ export class MainGame extends Component {
         elem.scale = new Vec3(0, 0, 0);
 
         elem.getComponent(RigidBody2D).linearVelocity = new Vec2(0, 0);
-        elem.getComponent(CircleCollider2D).radius = elem.getComponent(UITransform).height / 2;
-        elem.getComponent(CircleCollider2D).apply();
+        //elem.getComponent(Collider2D).radius = elem.getComponent(UITransform).height / 2;
+        elem.getComponent(Collider2D).apply();
 
         let tweenDuration = 0.5;
         tween(elem).to(tweenDuration,
@@ -150,8 +150,8 @@ export class MainGame extends Component {
         let t = this, scheduleOnceDelay = 1.0;
         
         let height = this.targetElem.getComponent(UITransform).height;
-        this.targetElem.getComponent(CircleCollider2D).radius = height / 2;
-        this.targetElem.getComponent(CircleCollider2D).apply();
+        //this.targetElem.getComponent(Collider2D).radius = height / 2;
+        this.targetElem.getComponent(Collider2D).apply();
         this.targetElem.getComponent(RigidBody2D).type = ERigidBody2DType.Dynamic;
         this.targetElem.getComponent(RigidBody2D).linearVelocity = new Vec2(0, 0);
 
