@@ -971,11 +971,31 @@
     "__prefab": null,
     "elemSprites": [
       {
-        "__uuid__": "0bb522d9-06cd-47d7-a03d-d3f347cbd114@f9941",
+        "__uuid__": "4f3384b4-67e7-4f67-baf9-f0eedb0da9d8@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "31dace28-6d8a-4c81-8e6b-971bb970683b@f9941",
+        "__uuid__": "d05752fc-9585-4f83-9732-e6deccd1560e@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "9885a468-4f4c-44c6-a4b9-0b0058e91e4d@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "bc5031af-eb4d-4a2b-8caf-8417812cd171@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "17718f62-3558-4983-8c39-3a3c06e5b85a@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "2b20974a-0014-4cbd-b628-bf053e4377b2@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "3fcbb9aa-a156-47ca-9902-d23e9e4cedca@f9941",
         "__expectedType__": "cc.SpriteFrame"
       }
     ],

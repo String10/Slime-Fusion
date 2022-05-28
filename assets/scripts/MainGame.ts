@@ -158,8 +158,20 @@ export class MainGame extends Component {
         this.targetElem.setParent(this.elemNode);
 
         this.scheduleOnce(function () {
-            t.createOneElem(t.createElemCount % t.elemSprites.length), t.createElemCount++;
+            t.createOneElem(Math.floor(MainGame.range(0, 3)) % t.elemSprites.length), t.createElemCount++;
         }, scheduleOnceDelay);
+    }
+
+    static seed: number = 0;
+    static range(min: number, max: number): number {
+        if (!this.seed && this.seed != 0) {
+            this.seed = new Date().getTime();
+        }
+        max = max || 1;
+        min = min || 0;
+        this.seed = (this.seed * 9301 + 49297) % 233280;
+        var rnd = this.seed / 233280.0;
+        return min + rnd * (max - min);
     }
 }
 
