@@ -31,6 +31,9 @@ export class MainGame extends Component {
     @property(Node)
     topNode: Node = null;
 
+    @property(Node)
+    elemNode: Node = null;
+
     @property(Camera)
     camera: Camera = null;
 
@@ -112,13 +115,15 @@ export class MainGame extends Component {
         if(null == this.targetElem) {
             return;
         }
-        let t = this, scheduleOnceDelay = 5;
+        let t = this, scheduleOnceDelay = 1.0;
         
         let height = this.targetElem.getComponent(UITransform).height;
         this.targetElem.getComponent(CircleCollider2D).radius = height / 2;
         this.targetElem.getComponent(CircleCollider2D).apply();
         this.targetElem.getComponent(RigidBody2D).type = ERigidBody2DType.Dynamic;
         this.targetElem.getComponent(RigidBody2D).linearVelocity = new Vec2(0, 0);
+
+        this.targetElem.setParent(this.elemNode);
 
         this.scheduleOnce(function () {
             switch (t.createElemCount) {
