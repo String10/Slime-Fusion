@@ -1,6 +1,7 @@
 import { _decorator, Component, Contact2DType, IPhysics2DContact, tween, Collider2D, Enum, Vec2, Vec3 } from 'cc';
 import { AudioSet } from './AudioSet';
 import { Bucket } from './Bucket';
+import { Score } from './Score';
 const { ccclass, property } = _decorator;
 
 @ccclass('Element')
@@ -109,6 +110,8 @@ export class Element extends Component {
                 otherCollider.node.destroy();
 
                 AudioSet.instance.playSound(Math.floor(Bucket.range(0, 2)) % 2, 1);
+
+                Score.instance.addScore(targetLevel);
             }).start();
         }
     }

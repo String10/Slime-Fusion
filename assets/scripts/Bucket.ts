@@ -49,6 +49,10 @@ export class Bucket extends Component {
 
     static instance: Bucket = null;
 
+    slimeScale: number = 0;
+
+    baseSlime: Array<number> = []
+
     onLoad() {
         if (null != Bucket.instance) {
             Bucket.instance.destroy();
@@ -59,6 +63,13 @@ export class Bucket extends Component {
 
         this.lastSlimeButton.node.on(Button.EventType.CLICK, this.getLastSlime, this);
         this.nextSlimeButton.node.on(Button.EventType.CLICK, this.getNextSlime, this);
+
+        this.slimeScale = 0.7;
+
+        this.baseSlime.push(0);
+        this.baseSlime.push(1);
+        this.baseSlime.push(2);
+        this.baseSlime.push(6);
     }
 
     start() {
@@ -78,9 +89,16 @@ export class Bucket extends Component {
         if(null == this.targetElem) {
             return;
         }
-        let newIndex = Math.floor(
-            this.targetElem.getComponent(Element).elemNumber + this.elemSprites.length - 1
-        ) % this.elemSprites.length;
+        var newIndex = 0;
+        let len = this.baseSlime.length;
+
+        for(var i = 0; i < len; i++) {
+            if(this.targetElem.getComponent(Element).elemNumber == this.baseSlime[i]) {
+                newIndex = this.baseSlime[Math.floor(i + len - 1) % len];
+                break;
+            }
+        }
+        
         this.targetElem.getComponent(Sprite).spriteFrame = this.elemSprites[newIndex];
         this.targetElem.getComponent(Element).elemNumber = newIndex;
     }
@@ -88,9 +106,16 @@ export class Bucket extends Component {
         if(null == this.targetElem) {
             return;
         }
-        let newIndex = Math.floor(
-            this.targetElem.getComponent(Element).elemNumber + 1
-        ) % this.elemSprites.length;
+        var newIndex = 0;
+        let len = this.baseSlime.length;
+
+        for(var i = 0; i < len; i++) {
+            if(this.targetElem.getComponent(Element).elemNumber == this.baseSlime[i]) {
+                newIndex = this.baseSlime[Math.floor(i + 1) % len];
+                break;
+            }
+        }
+
         this.targetElem.getComponent(Sprite).spriteFrame = this.elemSprites[newIndex];
         this.targetElem.getComponent(Element).elemNumber = newIndex;
     }
@@ -110,7 +135,7 @@ export class Bucket extends Component {
         let tweenDuration:number = 0.2, t = this;
         tween(newElem).to(tweenDuration,
             {
-                scale: new Vec3(1, 1, 1),
+                scale: new Vec3(this.slimeScale, this.slimeScale, this.slimeScale),
             },
             {
                 easing: 'backOut',
@@ -135,7 +160,9 @@ export class Bucket extends Component {
         let tweenDuration = 0.5;
         tween(elem).to(tweenDuration,
             {
-                scale: new Vec3(Math.pow(1.2, level), Math.pow(1.2, level), Math.pow(1.2, level)),
+                scale: new Vec3(this.slimeScale * Math.pow(1.2, level),
+                this.slimeScale * Math.pow(1.2, level),
+                this.slimeScale * Math.pow(1.2, level)),
             },
             {
                 easing: 'backOut',
@@ -180,9 +207,9 @@ export class Bucket extends Component {
                 view.getVisibleSize().x / 2,
             y = this.targetElem.position.y;
 
-        if(x - + this.targetElem.getComponent(UITransform).width / 2 <
+        if(x - this.slimeScale * this.targetElem.getComponent(UITransform).width / 2 <
                 -this.node.getComponent(UITransform).width / 2 ||
-            x + this.targetElem.getComponent(UITransform).width / 2 >
+            x + this.slimeScale * this.targetElem.getComponent(UITransform).width / 2 >
                 this.node.getComponent(UITransform).width / 2
         ) {
             return;
@@ -208,7 +235,9 @@ export class Bucket extends Component {
         this.targetElem.setParent(this.elemNode);
 
         this.scheduleOnce(function () {
-            t.createOneElem(Math.floor(Bucket.range(0, 3)) % t.elemSprites.length), t.createElemCount++;
+            t.createOneElem(
+                t.baseSlime[Math.floor(Bucket.range(0, t.baseSlime.length)) % t.baseSlime.length]
+            ), t.createElemCount++;
         }, scheduleOnceDelay);
 
         this.targetElem = null;
