@@ -11,14 +11,12 @@ import {
     Vec3,
     EventTouch,
     Input,
-    Camera,
     view,
     RigidBody2D,
     Collider2D,
     UITransform,
     ERigidBody2DType,
     PhysicsSystem2D,
-    Animation
 } from 'cc';
 import { Element } from './Element';
 const { ccclass, property } = _decorator;
@@ -145,6 +143,13 @@ export class Bucket extends Component {
                 this.node.getPosition().x -
                 view.getVisibleSize().x / 2,
             y = this.targetElem.position.y;
+
+        if(x < -this.node.getComponent(UITransform).width / 2 ||
+                x + this.targetElem.getComponent(UITransform).width / 2 >
+                    this.node.getComponent(UITransform).width / 2
+        ) {
+            return;
+        }
 
         this.targetElem.setPosition(x, y, 0);
     }

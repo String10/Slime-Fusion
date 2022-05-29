@@ -1,4 +1,4 @@
-import { _decorator, Component, CircleCollider2D, Contact2DType, IPhysics2DContact, tween, Collider2D } from 'cc';
+import { _decorator, Component, Contact2DType, IPhysics2DContact, tween, Collider2D } from 'cc';
 import { Bucket } from './Bucket';
 const { ccclass, property } = _decorator;
 
