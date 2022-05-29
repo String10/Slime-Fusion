@@ -14,7 +14,7 @@ import {
     Camera,
     view,
     RigidBody2D,
-    CircleCollider2D,
+    Collider2D,
     UITransform,
     ERigidBody2DType, 
     PhysicsSystem2D
@@ -55,7 +55,10 @@ export class MainGame extends Component {
     }
 
     start() {
-        this.createOneElem(0);
+        //this.createOneElem(0);
+        this.scheduleOnce(function () {
+            this.createOneElem(Math.floor(MainGame.range(0, 3)) % this.elemSprites.length), this.createElemCount++;
+        }, 1.0);
 
         this.bindTouch()
     }
@@ -63,7 +66,7 @@ export class MainGame extends Component {
     update(deltaTime: number) {
 
     }
-
+    //创建一个史莱姆
     createOneElem(index: number) {
         var newElem = instantiate(this.elemPre);
         newElem.parent = this.topNode;
@@ -71,8 +74,8 @@ export class MainGame extends Component {
         newElem.getComponent(Element).elemNumber = index;
 
         newElem.getComponent(RigidBody2D).type = ERigidBody2DType.Static
-        newElem.getComponent(CircleCollider2D).radius = 0;
-        newElem.getComponent(CircleCollider2D).apply();
+        //newElem.getComponent(Collider2D).radius = 0;
+        newElem.getComponent(Collider2D).apply();
 
         newElem.scale = new Vec3(0, 0, 0);
         let tweenDuration:number = 0.2, t = this;
@@ -87,7 +90,7 @@ export class MainGame extends Component {
             t.targetElem = newElem;
         }).start();
     }
-
+    
     createLevelUpElem(index: number, positon: Vec3) {
         let t = this, elem = instantiate(this.elemPre);
         elem.parent = t.elemNode;
@@ -97,8 +100,8 @@ export class MainGame extends Component {
         elem.scale = new Vec3(0, 0, 0);
 
         elem.getComponent(RigidBody2D).linearVelocity = new Vec2(0, 0);
-        elem.getComponent(CircleCollider2D).radius = elem.getComponent(UITransform).height / 2;
-        elem.getComponent(CircleCollider2D).apply();
+        //elem.getComponent(Collider2D).radius = elem.getComponent(UITransform).height / 2;
+        elem.getComponent(Collider2D).apply();
 
         let tweenDuration = 0.5;
         tween(elem).to(tweenDuration,
@@ -110,14 +113,14 @@ export class MainGame extends Component {
             }
         ).start();
     }
-
+    //绑定touch事件
     bindTouch() {
         this.node.on(Input.EventType.TOUCH_START, this.onTouchStart, this);
         this.node.on(Input.EventType.TOUCH_MOVE, this.onTouchMove, this);
         this.node.on(Input.EventType.TOUCH_END, this.onTouchEnd, this);
         this.node.on(Input.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
     }
-
+    
     onTouchStart(e: EventTouch) {
         if(null == this.targetElem) {
             return;
@@ -150,8 +153,8 @@ export class MainGame extends Component {
         let t = this, scheduleOnceDelay = 1.0;
         
         let height = this.targetElem.getComponent(UITransform).height;
-        this.targetElem.getComponent(CircleCollider2D).radius = height / 2;
-        this.targetElem.getComponent(CircleCollider2D).apply();
+        //this.targetElem.getComponent(Collider2D).radius = height / 2;
+        this.targetElem.getComponent(Collider2D).apply();
         this.targetElem.getComponent(RigidBody2D).type = ERigidBody2DType.Dynamic;
         this.targetElem.getComponent(RigidBody2D).linearVelocity = new Vec2(0, 0);
 
