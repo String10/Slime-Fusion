@@ -19,6 +19,7 @@ import {
     PhysicsSystem2D,
     Button,
 } from 'cc';
+import { AudioSet } from './AudioSet';
 import { Element } from './Element';
 import { Score } from './Score';
 const { ccclass, property } = _decorator;
@@ -75,10 +76,14 @@ export class Bucket extends Component {
     start() {
         //this.createOneElem(0);
         this.scheduleOnce(function () {
-            this.createOneElem(Math.floor(Bucket.range(0, 3)) % this.elemSprites.length), this.createElemCount++;
+            this.createOneElem(
+                this.baseSlime[Math.floor(Bucket.range(0, this.baseSlime.length)) % this.baseSlime.length]
+            ), this.createElemCount++;
         }, 1.0);
 
         this.bindTouch()
+
+        AudioSet.instance.playMusic(true);
     }
 
     update(deltaTime: number) {
@@ -245,14 +250,6 @@ export class Bucket extends Component {
             ), t.createElemCount++;
         }, scheduleOnceDelay);
 
-
-        let x = e.touch.getUILocation().x -
-                this.node.getPosition().x -
-                view.getVisibleSize().x / 2;
-        let y = e.touch.getUILocation().y -
-                this.node.getPosition().y -
-                view.getVisibleSize().y / 2;
-        //this.blast(x,y,20000);
         this.targetElem = null;
     }
 

@@ -29,6 +29,11 @@ export class AudioSet extends Component {
         
     }
 
+    playMusic(loop: boolean) {
+        this.audioSrc.loop = loop;
+        this.audioSrc.play();
+    }
+
     playSound(index: number, volumeScale: number) {
         this.audioSrc.playOneShot(AudioSet.instance.audios[index], volumeScale);
     }
