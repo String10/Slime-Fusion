@@ -102,7 +102,7 @@ export class Bucket extends Component {
         newElem.getComponent(Element).elemNumber = index;
 
         
-        newElem.getComponent(Collider2D).group = 8;
+        newElem.getComponent(Collider2D).group = 32;
         newElem.getComponent(RigidBody2D).type = ERigidBody2DType.Static
         //newElem.getComponent(Collider2D).radius = 0;
         newElem.getComponent(Collider2D).apply();
@@ -193,10 +193,12 @@ export class Bucket extends Component {
         if(null == this.targetElem) {
             return;
         }
-        this.targetElem.getComponent(Collider2D).group = 2;
+        let F = new Vec2(0,-3000);
+        this.targetElem.getComponent(RigidBody2D).applyForceToCenter(F,false);
+        //this.targetElem.getComponent(Collider2D).group = 2;
 
         // XXX: This may avoid crashes when new slime created in a falling one.
-        let t = this, scheduleOnceDelay = 0.3;
+        let t = this, scheduleOnceDelay = 1.0;
 
         let height = this.targetElem.getComponent(UITransform).height;
         //this.targetElem.getComponent(Collider2D).radius = height / 2;
@@ -210,7 +212,6 @@ export class Bucket extends Component {
             t.createOneElem(Math.floor(Bucket.range(0, 3)) % t.elemSprites.length), t.createElemCount++;
         }, scheduleOnceDelay);
 
-        this.targetElem = null;
 
         let x = e.touch.getUILocation().x -
                 this.node.getPosition().x -
@@ -219,30 +220,37 @@ export class Bucket extends Component {
                 this.node.getPosition().y -
                 view.getVisibleSize().y / 2;
         //this.blast(x,y,20000);
+        this.targetElem = null;
     }
 
-    blast(xx:number, yy:number, pow:number){
+    blast(xx:number, yy:number, pow:number,r:number){
         for (var i = 0; i < this.elemNode.children.length; i++) { 
             //语句 
             var blastee = this.elemNode.children[i];
+            if(null == blastee )continue;
+            if(blastee.getComponent(Collider2D).group != 2) continue;
             let x = blastee.position.x;
             let y = blastee.position.y;
             x = x-xx;
             y = y-yy;
+            if ((x*x+y*y)**0.5 > r*this.elemNode.getComponent(UITransform).width) continue;
             let l = (x*x+y*y)**0.7;
             let F = new Vec2((pow*x)/l,(pow*y)/l);
             blastee.getComponent(RigidBody2D).applyForceToCenter(F,false);
         }
     }
 
-    attract(xx:number, yy:number, pow:number){
+    attract(xx:number, yy:number, pow:number,r:number){
         for (var i = 0; i < this.elemNode.children.length; i++) { 
             //语句 
             var blastee = this.elemNode.children[i];
+            if(null == blastee )continue;
+            if(blastee.getComponent(Collider2D).group != 2) continue;
             let x = blastee.position.x;
             let y = blastee.position.y;
             x = x-xx;
             y = y-yy;
+            if ((x*x+y*y)**0.5 > r*this.elemNode.getComponent(UITransform).width) continue;
             let l = (x*x+y*y)**0.7;
             let F = new Vec2((-pow*x)/l,(-pow*y)/l);
             blastee.getComponent(RigidBody2D).applyForceToCenter(F,false);

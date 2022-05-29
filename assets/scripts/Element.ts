@@ -22,6 +22,7 @@ export class Element extends Component {
             table.push(new Vec3(WATER,  GROUND, GRASS));
             table.push(new Vec3(WATER,  WIND,   ICE));
             table.push(new Vec3(FIRE,   WIND,   THUNDER));
+            table.push(new Vec3(FIRE,   WATER,   THUNDER));
 
             Element.table = table;
         }
@@ -43,17 +44,19 @@ export class Element extends Component {
         otherCollider: Collider2D,
         contact: IPhysics2DContact | null
     ) {
-        //console.log(selfCollider.group+"and"+otherCollider.group);
-        //console.log(contact);
+        if(selfCollider.getComponent(Collider2D).group == 32 
+            && selfCollider.node.getPosition().y < -100){//防止穿墙一半卡死
+            console.log(selfCollider.node.getPosition().y);
+            selfCollider.getComponent(Collider2D).group = 2;
+        }
         if(otherCollider.group == selfCollider.group) {
-            //console.log("check2");
             if(selfCollider.node.getPosition().y < otherCollider.node.getPosition().y ||
                     selfCollider.node.getPosition().y == otherCollider.node.getPosition().y &&
                     selfCollider.node.getPosition().x < otherCollider.node.getPosition().x) {
                 return;
             }
-            //Bucket.instance.attract(selfCollider.node.getPosition().x,selfCollider.node.getPosition().y,10000);
-            //console.log("check3");
+            //let xx = selfCollider.node.getPosition().x, yy = selfCollider.node.getPosition().y
+            //Bucket.instance.attract(xx,yy,10000,3);
             let selfNumber = selfCollider.node.getComponent(Element).elemNumber;
             let otherNumber = otherCollider.node.getComponent(Element).elemNumber;
             var targetNumber = -1;
@@ -92,6 +95,11 @@ export class Element extends Component {
                 selfCollider.node.destroy();
                 otherCollider.node.destroy();
             }).start();
+            /*if(targetNumber == 4){
+                Bucket.instance.attract(xx,yy,10000,1.5);
+                Bucket.instance.attract(xx,yy,10000,1.5);
+                Bucket.instance.attract(xx,yy,10000,1.5);
+            }*/
         }
     }
 }
