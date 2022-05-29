@@ -40,5 +40,11 @@
       "restitution": 0.4,
       "rollingFriction": 0.3
     }
-  }
+  },
+  "layer": [
+    {
+      "name": "START",
+      "value": 4
+    }
+  ]
 }
