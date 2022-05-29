@@ -17,6 +17,7 @@ import {
     UITransform,
     ERigidBody2DType,
     PhysicsSystem2D,
+    Button,
 } from 'cc';
 import { Element } from './Element';
 const { ccclass, property } = _decorator;
@@ -35,6 +36,12 @@ export class Bucket extends Component {
     @property(Node)
     elemNode: Node = null;
 
+    @property(Button)
+    lastSlimeButton: Button = null;
+
+    @property(Button)
+    nextSlimeButton: Button = null;
+
     targetElem: Node = null;
 
     createElemCount: number = 0;
@@ -48,6 +55,9 @@ export class Bucket extends Component {
         Bucket.instance = this;
 
         PhysicsSystem2D.instance.enable = true;
+
+        this.lastSlimeButton.node.on(Button.EventType.CLICK, this.getLastSlime, this);
+        this.nextSlimeButton.node.on(Button.EventType.CLICK, this.getNextSlime, this);
     }
 
     start() {
@@ -62,6 +72,28 @@ export class Bucket extends Component {
     update(deltaTime: number) {
 
     }
+
+    getLastSlime() {
+        if(null == this.targetElem) {
+            return;
+        }
+        let newIndex = Math.floor(
+            this.targetElem.getComponent(Element).elemNumber + this.elemSprites.length - 1
+        ) % this.elemSprites.length;
+        this.targetElem.getComponent(Sprite).spriteFrame = this.elemSprites[newIndex];
+        this.targetElem.getComponent(Element).elemNumber = newIndex;
+    }
+    getNextSlime() {
+        if(null == this.targetElem) {
+            return;
+        }
+        let newIndex = Math.floor(
+            this.targetElem.getComponent(Element).elemNumber + 1
+        ) % this.elemSprites.length;
+        this.targetElem.getComponent(Sprite).spriteFrame = this.elemSprites[newIndex];
+        this.targetElem.getComponent(Element).elemNumber = newIndex;
+    }
+
     //创建一个史莱姆
     createOneElem(index: number) {
         var newElem = instantiate(this.elemPre);
