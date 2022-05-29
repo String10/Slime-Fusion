@@ -20,6 +20,7 @@
     ],
     "_active": true,
     "_components": [],
+    "_prefab": null,
     "autoReleaseAssets": false,
     "_globals": {
       "__id__": 43
@@ -1191,8 +1192,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -280,
-      "y": 249.99999999999994,
+      "x": -14,
+      "y": 250,
       "z": 0
     },
     "_lrot": {
@@ -1413,14 +1414,14 @@
       "x": 0,
       "y": 0,
       "z": 0,
-      "w": 1
+      "w": 0.520833125
     },
     "_skyColor": {
       "__type__": "cc.Vec4",
       "x": 0,
       "y": 0,
       "z": 0,
-      "w": 1
+      "w": 0.520833125
     },
     "_skyIllumHDR": 20000,
     "_skyIllum": 20000,

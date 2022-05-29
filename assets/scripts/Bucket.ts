@@ -161,7 +161,7 @@ export class Bucket extends Component {
         }
 
         // XXX: This may avoid crashes when new slime created in a falling one.
-        let t = this, scheduleOnceDelay = 2.0;
+        let t = this, scheduleOnceDelay = 1.0;
 
         let height = this.targetElem.getComponent(UITransform).height;
         //this.targetElem.getComponent(Collider2D).radius = height / 2;

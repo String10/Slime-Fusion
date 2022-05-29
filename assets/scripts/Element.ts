@@ -25,17 +25,26 @@ export class Element extends Component {
         otherCollider: Collider2D,
         contact: IPhysics2DContact | null
     ) {
+        console.log(selfCollider.group+"and"+otherCollider.group);
+        console.log(contact);
         if(otherCollider.group == selfCollider.group) {
+            console.log("check2");
             if(selfCollider.node.getPosition().y < otherCollider.node.getPosition().y ||
                     selfCollider.node.getPosition().y == otherCollider.node.getPosition().y &&
                     selfCollider.node.getPosition().x < otherCollider.node.getPosition().x) {
                 return;
             }
+            console.log("check3");
             let selfNumber = selfCollider.node.getComponent(Element).elemNumber;
             let otherNumber = otherCollider.node.getComponent(Element).elemNumber;
+            console.log(selfNumber + " with "+otherNumber);
+
             if(selfNumber != otherNumber || selfNumber + 1 == Bucket.instance.elemSprites.length) {
                 return;
             }
+
+            selfCollider.group = 8;
+            otherCollider.group = 16;
 
 
             let newPos = otherCollider.node.getPosition();
