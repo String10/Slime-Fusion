@@ -68,7 +68,7 @@ export class Bucket extends Component {
 
         this.baseSlime.push(0);
         this.baseSlime.push(1);
-        this.baseSlime.push(2);
+        this.baseSlime.push(3);
         this.baseSlime.push(6);
     }
 
