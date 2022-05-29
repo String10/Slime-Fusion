@@ -34,6 +34,15 @@ export class Element extends Component {
             table.push(new Vec3(WATER,  GROUND, GRASS));
             table.push(new Vec3(WATER,  WIND,   ICE));
             table.push(new Vec3(FIRE,   WIND,   THUNDER));
+            table.push(new Vec3(GRASS,   WATER,   LEMON));
+            table.push(new Vec3(METAL,   BEAR,   HANDSSOME));
+            table.push(new Vec3(GRASS,   GROUND,   BEAR));
+            table.push(new Vec3(ICE,   LEMON,   ICECREAM));
+            table.push(new Vec3(HANDSSOME,   CLOUD,   SUSHI));
+            table.push(new Vec3(ICECREAM,   SUSHI,   RAINBOW));
+            table.push(new Vec3(WATER,   FIRE,   CLOUD));
+            table.push(new Vec3(WATER,   WIND,   ICE));
+            table.push(new Vec3(GROUND,   FIRE,   METAL));
 
             Element.table = table;
         }
