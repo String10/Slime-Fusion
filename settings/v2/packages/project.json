@@ -9,12 +9,22 @@
       {
         "index": 2,
         "name": "BORDERS"
+      },
+      {
+        "index": 3,
+        "name": "COMBO"
+      },
+      {
+        "index": 4,
+        "name": "COMBO2"
       }
     ],
     "collisionMatrix": {
       "0": 1,
-      "1": 6,
-      "2": 2
+      "1": 30,
+      "2": 26,
+      "3": 30,
+      "4": 30
     },
     "defaultMaterial": {
       "restitution": 0.4,
