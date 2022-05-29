@@ -1,4 +1,5 @@
 import { _decorator, Component, Contact2DType, IPhysics2DContact, tween, Collider2D, Enum, Vec2, Vec3 } from 'cc';
+import { AudioSet } from './AudioSet';
 import { Bucket } from './Bucket';
 const { ccclass, property } = _decorator;
 
@@ -90,6 +91,8 @@ export class Element extends Component {
                 otherCollider.node.active = false;
                 selfCollider.node.destroy();
                 otherCollider.node.destroy();
+
+                AudioSet.instance.playSound(Math.floor(Bucket.range(0, 2)) % 2, 1);
             }).start();
         }
     }
