@@ -20,7 +20,16 @@ export class Element extends Component {
                 GROUND = 3,
                 THUNDER = 4,
                 ICE = 5,
-                WIND = 6;
+                WIND = 6,
+                METAL = 7,
+                CLOUD = 8,
+                HANDSSOME = 9,
+                LEMON = 10,
+                BEAR = 11,
+                ICECREAM = 12,
+                SUSHI = 13,
+                RAINBOW = 14
+            ;
             var table = [];
             table.push(new Vec3(WATER,  GROUND, GRASS));
             table.push(new Vec3(WATER,  WIND,   ICE));
