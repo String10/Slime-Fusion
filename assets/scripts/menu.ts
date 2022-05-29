@@ -1,4 +1,4 @@
-import { _decorator, Component, Node , director, Button ,EventHandler } from 'cc';
+import { _decorator, Component, director, Button} from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('menu')
@@ -9,6 +9,8 @@ export class menu extends Component {
 
     onLoad() {
         this.changescene.node.on(Button.EventType.CLICK, this.change, this);
+
+        director.preloadScene("maingame");
     }
 
     start() {
@@ -17,11 +19,10 @@ export class menu extends Component {
 
     change() {
         director.loadScene("maingame");
-        console.log("114514");
     }
 
     update(deltaTime: number) {
-        
+
     }
 }
 
