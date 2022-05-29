@@ -163,6 +163,8 @@ export class MainGame extends Component {
         this.scheduleOnce(function () {
             t.createOneElem(Math.floor(MainGame.range(0, 3)) % t.elemSprites.length), t.createElemCount++;
         }, scheduleOnceDelay);
+
+        this.targetElem = null;
     }
 
     static seed: number = 0;
