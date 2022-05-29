@@ -68,7 +68,7 @@ export class Bucket extends Component {
 
         this.baseSlime.push(0);
         this.baseSlime.push(1);
-        this.baseSlime.push(2);
+        this.baseSlime.push(3);
         this.baseSlime.push(6);
     }
 
@@ -286,6 +286,23 @@ export class Bucket extends Component {
             if ((x*x+y*y)**0.5 > r*this.elemNode.getComponent(UITransform).width) continue;
             let l = (x*x+y*y)**0.7;
             let F = new Vec2((-pow*x)/l,(-pow*y)/l);
+            blastee.getComponent(RigidBody2D).applyForceToCenter(F,false);
+        }
+    }
+
+    fly(xx:number, yy:number, pow:number,r:number){
+        for (var i = 0; i < this.elemNode.children.length; i++) { 
+            //语句 
+            var blastee = this.elemNode.children[i];
+            if(null == blastee )continue;
+            if(blastee.getComponent(Collider2D).group != 2) continue;
+            let x = blastee.position.x;
+            let y = blastee.position.y;
+            x = x-xx;
+            y = y-yy;
+            if ((x*x+y*y)**0.5 > r*this.elemNode.getComponent(UITransform).width) continue;
+            let l = (x*x+y*y)**0.7;
+            let F = new Vec2(0,pow);
             blastee.getComponent(RigidBody2D).applyForceToCenter(F,false);
         }
     }

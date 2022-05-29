@@ -76,7 +76,7 @@ export class Element extends Component {
                     selfCollider.node.getPosition().x < otherCollider.node.getPosition().x) {
                 return;
             }
-            //let xx = selfCollider.node.getPosition().x, yy = selfCollider.node.getPosition().y
+            let xx = selfCollider.node.getPosition().x, yy = selfCollider.node.getPosition().y
             //Bucket.instance.attract(xx,yy,10000,3);
             let selfNumber = selfCollider.node.getComponent(Element).elemNumber;
             let otherNumber = otherCollider.node.getComponent(Element).elemNumber;
@@ -122,6 +122,12 @@ export class Element extends Component {
                 otherCollider.node.destroy();
 
                 AudioSet.instance.playSound(Math.floor(Bucket.range(0, 2)) % 2, 1);
+                if(targetNumber == 4)Bucket.instance.attract(xx,yy,5000,2.5);
+                if(targetNumber == 7)Bucket.instance.attract(xx,yy,10000,1.5);
+                if(targetNumber == 11)Bucket.instance.blast(xx,yy,10000,1.5);
+                if(targetNumber == 10)Bucket.instance.blast(xx,yy,5000,2.5);
+                if(targetNumber == 12 || targetNumber == 13)Bucket.instance.attract(xx,yy,10000,2.5);
+                if(targetNumber == 8)Bucket.instance.fly(xx,yy,10000,2.5);
 
                 Score.instance.addScore(targetLevel);
             }).start();
