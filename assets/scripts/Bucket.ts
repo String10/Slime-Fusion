@@ -120,7 +120,7 @@ export class Bucket extends Component {
         }).start();
     }
 
-    createLevelUpElem(index: number, positon: Vec3) {
+    createLevelUpElem(index: number, level: number, positon: Vec3) {
         let t = this, elem = instantiate(this.elemPre);
         elem.parent = t.elemNode;
         elem.getComponent(Sprite).spriteFrame = t.elemSprites[index];
@@ -135,7 +135,7 @@ export class Bucket extends Component {
         let tweenDuration = 0.5;
         tween(elem).to(tweenDuration,
             {
-                scale: new Vec3(1, 1, 1),
+                scale: new Vec3(Math.pow(1.2, level), Math.pow(1.2, level), Math.pow(1.2, level)),
             },
             {
                 easing: 'backOut',

@@ -8,6 +8,8 @@ export class Element extends Component {
     @property
     elemNumber: number = 0;
 
+    elemLevel: number = 0;
+
     static table: Vec3[] = null;
 
     onLoad() {
@@ -32,7 +34,7 @@ export class Element extends Component {
     }
 
     start() {
-
+        this.elemLevel = 0;
     }
 
     update(deltaTime: number) {
@@ -71,6 +73,11 @@ export class Element extends Component {
                 return;
             }
 
+            let targetLevel = Math.max(
+                selfCollider.node.getComponent(Element).elemLevel,
+                otherCollider.node.getComponent(Element).elemLevel
+            ) + 1;
+
             let newPos = otherCollider.node.getPosition();
             //otherCollider.node.getComponent(Collider2D).radius = 0;
             // otherCollider.node.getComponent(Collider2D).apply();
@@ -86,7 +93,7 @@ export class Element extends Component {
                     position: newPos,
                 }
             ).call(function () {
-                Bucket.instance.createLevelUpElem(targetNumber, newPos);
+                Bucket.instance.createLevelUpElem(targetNumber, targetLevel, newPos);
                 selfCollider.node.active = false;
                 otherCollider.node.active = false;
                 selfCollider.node.destroy();
