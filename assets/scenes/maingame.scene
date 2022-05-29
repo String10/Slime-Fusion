@@ -20,12 +20,9 @@
     ],
     "_active": true,
     "_components": [],
-    "_prefab": {
-      "__id__": 43
-    },
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 44
+      "__id__": 43
     },
     "_id": "3ff7702b-670f-4ea2-8cba-b88085f78965"
   },
@@ -1392,25 +1389,21 @@
     "_id": "c5V1EV8IpMtrIvY1OE9t2u"
   },
   {
-    "__type__": "cc.PrefabInfo",
-    "fileId": "3ff7702b-670f-4ea2-8cba-b88085f78965"
-  },
-  {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 45
+      "__id__": 44
     },
     "shadows": {
-      "__id__": 46
+      "__id__": 45
     },
     "_skybox": {
-      "__id__": 47
+      "__id__": 46
     },
     "fog": {
-      "__id__": 48
+      "__id__": 47
     },
     "octree": {
-      "__id__": 49
+      "__id__": 48
     }
   },
   {
@@ -1420,14 +1413,14 @@
       "x": 0,
       "y": 0,
       "z": 0,
-      "w": 0.520833125
+      "w": 1
     },
     "_skyColor": {
       "__type__": "cc.Vec4",
       "x": 0,
       "y": 0,
       "z": 0,
-      "w": 0.520833125
+      "w": 1
     },
     "_skyIllumHDR": 20000,
     "_skyIllum": 20000,
@@ -1436,14 +1429,14 @@
       "x": 0,
       "y": 0,
       "z": 0,
-      "w": 0
+      "w": 1
     },
     "_groundAlbedo": {
       "__type__": "cc.Vec4",
       "x": 0,
       "y": 0,
       "z": 0,
-      "w": 0
+      "w": 1
     },
     "_skyColorLDR": {
       "__type__": "cc.Vec4",
