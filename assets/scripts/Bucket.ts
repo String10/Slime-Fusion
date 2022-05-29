@@ -20,6 +20,7 @@ import {
     Button,
 } from 'cc';
 import { Element } from './Element';
+import { Score } from './Score';
 const { ccclass, property } = _decorator;
 
 @ccclass('Bucket')
@@ -164,6 +165,9 @@ export class Bucket extends Component {
                 position: new Vec3(x, y, 0),
             }
         ).start();
+
+        // Using to update score
+        // Score.instance.addScore(1);
     }
 
     onTouchMove(e: EventTouch) {
