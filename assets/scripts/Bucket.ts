@@ -103,7 +103,7 @@ export class Bucket extends Component {
                 break;
             }
         }
-        
+
         this.targetElem.getComponent(Sprite).spriteFrame = this.elemSprites[newIndex];
         this.targetElem.getComponent(Element).elemNumber = newIndex;
     }
@@ -131,8 +131,8 @@ export class Bucket extends Component {
         newElem.parent = this.topNode;
         newElem.getComponent(Sprite).spriteFrame = this.elemSprites[index];
         newElem.getComponent(Element).elemNumber = index;
+        newElem.getComponent(Element).elemLevel = 0;
 
-        
         newElem.getComponent(Collider2D).group = 32;
         newElem.getComponent(RigidBody2D).type = ERigidBody2DType.Static
         //newElem.getComponent(Collider2D).radius = 0;
@@ -157,6 +157,7 @@ export class Bucket extends Component {
         elem.parent = t.elemNode;
         elem.getComponent(Sprite).spriteFrame = t.elemSprites[index];
         elem.getComponent(Element).elemNumber = index;
+        elem.getComponent(Element).elemLevel = level;
         elem.setPosition(positon);
         elem.scale = new Vec3(0, 0, 0);
 
@@ -167,9 +168,11 @@ export class Bucket extends Component {
         let tweenDuration = 0.5;
         tween(elem).to(tweenDuration,
             {
-                scale: new Vec3(this.slimeScale * Math.pow(1.2, level),
-                this.slimeScale * Math.pow(1.2, level),
-                this.slimeScale * Math.pow(1.2, level)),
+                scale: new Vec3(
+                    this.slimeScale * Math.pow(1.2, level),
+                    this.slimeScale * Math.pow(1.2, level),
+                    this.slimeScale * Math.pow(1.2, level)
+                ),
             },
             {
                 easing: 'backOut',
@@ -254,8 +257,8 @@ export class Bucket extends Component {
     }
 
     blast(xx:number, yy:number, pow:number,r:number){
-        for (var i = 0; i < this.elemNode.children.length; i++) { 
-            //语句 
+        for (var i = 0; i < this.elemNode.children.length; i++) {
+            //语句
             var blastee = this.elemNode.children[i];
             if(null == blastee )continue;
             if(blastee.getComponent(Collider2D).group != 2) continue;
@@ -271,8 +274,8 @@ export class Bucket extends Component {
     }
 
     attract(xx:number, yy:number, pow:number,r:number){
-        for (var i = 0; i < this.elemNode.children.length; i++) { 
-            //语句 
+        for (var i = 0; i < this.elemNode.children.length; i++) {
+            //语句
             var blastee = this.elemNode.children[i];
             if(null == blastee )continue;
             if(blastee.getComponent(Collider2D).group != 2) continue;
@@ -288,8 +291,8 @@ export class Bucket extends Component {
     }
 
     fly(xx:number, yy:number, pow:number,r:number){
-        for (var i = 0; i < this.elemNode.children.length; i++) { 
-            //语句 
+        for (var i = 0; i < this.elemNode.children.length; i++) {
+            //语句
             var blastee = this.elemNode.children[i];
             if(null == blastee )continue;
             if(blastee.getComponent(Collider2D).group != 2) continue;

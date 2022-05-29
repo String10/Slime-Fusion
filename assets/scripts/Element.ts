@@ -44,7 +44,7 @@ export class Element extends Component {
             table.push(new Vec3(WATER,   WIND,   ICE));
             table.push(new Vec3(GROUND,   FIRE,   METAL));
             table.push(new Vec3(ICECREAM,   SUSHI,   RAINBOW));
-            
+
             table.push(new Vec3(HANDSSOME,   SUSHI,   HANDSSOME));
             table.push(new Vec3(HANDSSOME,   ICECREAM,   HANDSSOME));
             table.push(new Vec3(HANDSSOME,   LEMON,   HANDSSOME));
@@ -53,7 +53,7 @@ export class Element extends Component {
             table.push(new Vec3(BEAR,   ICECREAM,   BEAR));
             table.push(new Vec3(BEAR,   LEMON,   BEAR));
             table.push(new Vec3(BEAR,   SUSHI,   BEAR));
-            
+
             table.push(new Vec3(FIRE, GRASS, FIRE));
             table.push(new Vec3(METAL, THUNDER, METAL));
 
@@ -65,7 +65,7 @@ export class Element extends Component {
     }
 
     start() {
-        this.elemLevel = 0;
+
     }
 
     update(deltaTime: number) {
@@ -77,9 +77,9 @@ export class Element extends Component {
         otherCollider: Collider2D,
         contact: IPhysics2DContact | null
     ) {
-        if(selfCollider.getComponent(Collider2D).group == 32 
+        if(selfCollider.getComponent(Collider2D).group == 32
             && selfCollider.node.getPosition().y < -100){//防止穿墙一半卡死
-            console.log(selfCollider.node.getPosition().y);
+            // console.log(selfCollider.node.getPosition().y);
             selfCollider.getComponent(Collider2D).group = 2;
         }
         if(otherCollider.group == selfCollider.group) {
@@ -102,7 +102,7 @@ export class Element extends Component {
                     break;
                 }
             }
-            
+
             if(targetNumber < 0) {
                 return;
             }
@@ -111,6 +111,8 @@ export class Element extends Component {
                 selfCollider.node.getComponent(Element).elemLevel,
                 otherCollider.node.getComponent(Element).elemLevel
             ) + 1;
+
+            // console.log(targetLevel);
 
             let newPos = otherCollider.node.getPosition();
             //otherCollider.node.getComponent(Collider2D).radius = 0;
