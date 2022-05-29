@@ -43,16 +43,17 @@ export class Element extends Component {
         otherCollider: Collider2D,
         contact: IPhysics2DContact | null
     ) {
-        console.log(selfCollider.group+"and"+otherCollider.group);
-        console.log(contact);
+        //console.log(selfCollider.group+"and"+otherCollider.group);
+        //console.log(contact);
         if(otherCollider.group == selfCollider.group) {
-            console.log("check2");
+            //console.log("check2");
             if(selfCollider.node.getPosition().y < otherCollider.node.getPosition().y ||
                     selfCollider.node.getPosition().y == otherCollider.node.getPosition().y &&
                     selfCollider.node.getPosition().x < otherCollider.node.getPosition().x) {
                 return;
             }
-            console.log("check3");
+            //Bucket.instance.attract(selfCollider.node.getPosition().x,selfCollider.node.getPosition().y,10000);
+            //console.log("check3");
             let selfNumber = selfCollider.node.getComponent(Element).elemNumber;
             let otherNumber = otherCollider.node.getComponent(Element).elemNumber;
             var targetNumber = -1;
@@ -65,7 +66,7 @@ export class Element extends Component {
                     break;
                 }
             }
-
+            
             if(targetNumber < 0) {
                 return;
             }
