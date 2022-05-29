@@ -17,7 +17,8 @@ import {
     Collider2D,
     UITransform,
     ERigidBody2DType, 
-    PhysicsSystem2D
+    PhysicsSystem2D,
+    Animation
 } from 'cc';
 import { Element } from './Element';
 const { ccclass, property } = _decorator;
@@ -35,6 +36,9 @@ export class MainGame extends Component {
 
     @property(Node)
     elemNode: Node = null;
+
+    @property(Node)
+    nekoNode: Node = null;
 
     @property(Camera)
     camera: Camera = null;
