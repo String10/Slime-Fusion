@@ -40,10 +40,22 @@ export class Element extends Component {
             table.push(new Vec3(GRASS,   GROUND,   BEAR));
             table.push(new Vec3(ICE,   LEMON,   ICECREAM));
             table.push(new Vec3(HANDSSOME,   CLOUD,   SUSHI));
-            table.push(new Vec3(ICECREAM,   SUSHI,   RAINBOW));
             table.push(new Vec3(WATER,   FIRE,   CLOUD));
             table.push(new Vec3(WATER,   WIND,   ICE));
             table.push(new Vec3(GROUND,   FIRE,   METAL));
+            table.push(new Vec3(ICECREAM,   SUSHI,   RAINBOW));
+            
+            table.push(new Vec3(HANDSSOME,   SUSHI,   HANDSSOME));
+            table.push(new Vec3(HANDSSOME,   ICECREAM,   HANDSSOME));
+            table.push(new Vec3(HANDSSOME,   LEMON,   HANDSSOME));
+
+            table.push(new Vec3(BEAR,   GRASS,   BEAR));
+            table.push(new Vec3(BEAR,   ICECREAM,   BEAR));
+            table.push(new Vec3(BEAR,   LEMON,   BEAR));
+            table.push(new Vec3(BEAR,   SUSHI,   BEAR));
+            
+            table.push(new Vec3(FIRE, GRASS, FIRE));
+            table.push(new Vec3(METAL, THUNDER, METAL));
 
             Element.table = table;
         }
@@ -76,7 +88,7 @@ export class Element extends Component {
                     selfCollider.node.getPosition().x < otherCollider.node.getPosition().x) {
                 return;
             }
-            //let xx = selfCollider.node.getPosition().x, yy = selfCollider.node.getPosition().y
+            let xx = selfCollider.node.getPosition().x, yy = selfCollider.node.getPosition().y
             //Bucket.instance.attract(xx,yy,10000,3);
             let selfNumber = selfCollider.node.getComponent(Element).elemNumber;
             let otherNumber = otherCollider.node.getComponent(Element).elemNumber;
@@ -122,6 +134,12 @@ export class Element extends Component {
                 otherCollider.node.destroy();
 
                 AudioSet.instance.playSound(Math.floor(Bucket.range(0, 2)) % 2, 1);
+                if(targetNumber == 4)Bucket.instance.attract(xx,yy,5000,2.5);
+                if(targetNumber == 7)Bucket.instance.attract(xx,yy,10000,1.5);
+                if(targetNumber == 11)Bucket.instance.blast(xx,yy,10000,1.5);
+                if(targetNumber == 10)Bucket.instance.blast(xx,yy,5000,2.5);
+                if(targetNumber == 12 || targetNumber == 13)Bucket.instance.attract(xx,yy,10000,2.5);
+                if(targetNumber == 8)Bucket.instance.fly(xx,yy,10000,2.5);
 
                 Score.instance.addScore(targetLevel);
             }).start();
