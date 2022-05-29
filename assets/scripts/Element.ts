@@ -1,5 +1,5 @@
 import { _decorator, Component, CircleCollider2D, Contact2DType, IPhysics2DContact, tween, Collider2D } from 'cc';
-import { MainGame } from './MainGame';
+import { Bucket } from './Bucket';
 const { ccclass, property } = _decorator;
 
 @ccclass('Element')
@@ -33,24 +33,24 @@ export class Element extends Component {
             }
             let selfNumber = selfCollider.node.getComponent(Element).elemNumber;
             let otherNumber = otherCollider.node.getComponent(Element).elemNumber;
-            if(selfNumber != otherNumber || selfNumber + 1 == MainGame.instance.elemSprites.length) {
+            if(selfNumber != otherNumber || selfNumber + 1 == Bucket.instance.elemSprites.length) {
                 return;
             }
-            
-            
+
+
             let newPos = otherCollider.node.getPosition();
             //otherCollider.node.getComponent(Collider2D).radius = 0;
             // otherCollider.node.getComponent(Collider2D).apply();
             //selfCollider.node.getComponent(Collider2D).radius = 0;
             // selfCollider.node.getComponent(Collider2D).apply();
-            
+
             let tweenDuration = 0.1;
             tween(selfCollider.node).to(tweenDuration,
                 {
                     position: newPos,
                 }
             ).call(function () {
-                MainGame.instance.createLevelUpElem(selfNumber + 1, newPos);
+                Bucket.instance.createLevelUpElem(selfNumber + 1, newPos);
                 selfCollider.node.active = false;
                 otherCollider.node.active = false;
                 selfCollider.node.destroy();

@@ -22,7 +22,7 @@ export class AdjustWithHeight extends Component {
     }
 
     update(deltaTime: number) {
-        
+
     }
 
     showTheNode() {
