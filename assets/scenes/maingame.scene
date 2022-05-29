@@ -20,6 +20,7 @@
     ],
     "_active": true,
     "_components": [],
+    "_prefab": null,
     "autoReleaseAssets": false,
     "_globals": {
       "__id__": 43
@@ -1413,14 +1414,14 @@
       "x": 0,
       "y": 0,
       "z": 0,
-      "w": 1
+      "w": 0.520833125
     },
     "_skyColor": {
       "__type__": "cc.Vec4",
       "x": 0,
       "y": 0,
       "z": 0,
-      "w": 1
+      "w": 0.520833125
     },
     "_skyIllumHDR": 20000,
     "_skyIllum": 20000,
