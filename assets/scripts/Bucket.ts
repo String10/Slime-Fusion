@@ -121,17 +121,24 @@ export class Bucket extends Component {
         if(null == this.targetElem) {
             return;
         }
+
         let x = e.touch.getUILocation().x -
                 this.node.getPosition().x -
                 view.getVisibleSize().x / 2,
             y = this.targetElem.position.y;
-
+        if(x < -this.node.getComponent(UITransform).width / 2 ||
+            x + this.targetElem.getComponent(UITransform).width / 2 >
+                this.node.getComponent(UITransform).width / 2
+        ) {
+            return;
+        }
         let tweenDuration:number = 0.2;
         tween(this.targetElem).to(tweenDuration,
             {
                 position: new Vec3(x, y, 0),
             }
         ).start();
+
     }
 
     onTouchMove(e: EventTouch) {
