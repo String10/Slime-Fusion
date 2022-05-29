@@ -1,4 +1,4 @@
-import { 
+import {
     _decorator,
     Component,
     Node,
@@ -16,15 +16,15 @@ import {
     RigidBody2D,
     Collider2D,
     UITransform,
-    ERigidBody2DType, 
+    ERigidBody2DType,
     PhysicsSystem2D,
     Animation
 } from 'cc';
 import { Element } from './Element';
 const { ccclass, property } = _decorator;
 
-@ccclass('MainGame')
-export class MainGame extends Component {
+@ccclass('Bucket')
+export class Bucket extends Component {
     @property([SpriteFrame])
     elemSprites:Array<SpriteFrame> = [];
 
@@ -37,23 +37,17 @@ export class MainGame extends Component {
     @property(Node)
     elemNode: Node = null;
 
-    @property(Node)
-    nekoNode: Node = null;
-
-    @property(Camera)
-    camera: Camera = null;
-
     targetElem: Node = null;
 
     createElemCount: number = 0;
 
-    static instance: MainGame = null;
+    static instance: Bucket = null;
 
     onLoad() {
-        if (null != MainGame.instance) {
-            MainGame.instance.destroy();
+        if (null != Bucket.instance) {
+            Bucket.instance.destroy();
         }
-        MainGame.instance = this;
+        Bucket.instance = this;
 
         PhysicsSystem2D.instance.enable = true;
     }
@@ -61,7 +55,7 @@ export class MainGame extends Component {
     start() {
         //this.createOneElem(0);
         this.scheduleOnce(function () {
-            this.createOneElem(Math.floor(MainGame.range(0, 3)) % this.elemSprites.length), this.createElemCount++;
+            this.createOneElem(Math.floor(Bucket.range(0, 3)) % this.elemSprites.length), this.createElemCount++;
         }, 1.0);
 
         this.bindTouch()
@@ -94,7 +88,7 @@ export class MainGame extends Component {
             t.targetElem = newElem;
         }).start();
     }
-    
+
     createLevelUpElem(index: number, positon: Vec3) {
         let t = this, elem = instantiate(this.elemPre);
         elem.parent = t.elemNode;
@@ -124,12 +118,16 @@ export class MainGame extends Component {
         this.node.on(Input.EventType.TOUCH_END, this.onTouchEnd, this);
         this.node.on(Input.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
     }
-    
+
     onTouchStart(e: EventTouch) {
         if(null == this.targetElem) {
             return;
         }
-        let x = e.touch.getUILocation().x - view.getVisibleSize().x / 2, y = this.targetElem.position.y;
+        let x = e.touch.getUILocation().x -
+                this.node.getPosition().x -
+                view.getVisibleSize().x / 2,
+            y = this.targetElem.position.y;
+
         let tweenDuration:number = 0.2;
         tween(this.targetElem).to(tweenDuration,
             {
@@ -143,11 +141,12 @@ export class MainGame extends Component {
             return;
         }
 
-        this.targetElem.setPosition(
-            e.touch.getUILocation().x - view.getVisibleSize().x / 2,
-            this.targetElem.position.y,
-            0
-        );
+        let x = e.touch.getUILocation().x -
+                this.node.getPosition().x -
+                view.getVisibleSize().x / 2,
+            y = this.targetElem.position.y;
+
+        this.targetElem.setPosition(x, y, 0);
     }
 
     onTouchEnd(e: EventTouch) {
@@ -155,7 +154,7 @@ export class MainGame extends Component {
             return;
         }
         let t = this, scheduleOnceDelay = 1.0;
-        
+
         let height = this.targetElem.getComponent(UITransform).height;
         //this.targetElem.getComponent(Collider2D).radius = height / 2;
         this.targetElem.getComponent(Collider2D).apply();
@@ -165,7 +164,7 @@ export class MainGame extends Component {
         this.targetElem.setParent(this.elemNode);
 
         this.scheduleOnce(function () {
-            t.createOneElem(Math.floor(MainGame.range(0, 3)) % t.elemSprites.length), t.createElemCount++;
+            t.createOneElem(Math.floor(Bucket.range(0, 3)) % t.elemSprites.length), t.createElemCount++;
         }, scheduleOnceDelay);
 
         this.targetElem = null;
