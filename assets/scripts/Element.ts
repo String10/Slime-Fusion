@@ -32,6 +32,8 @@ export class Element extends Component {
                 RAINBOW = 14
             ;
             var table = [];
+            //table.push(new Vec3(WATER,  GROUND, RAINBOW));
+
             table.push(new Vec3(WATER,  GROUND, GRASS));
             table.push(new Vec3(WATER,  WIND,   ICE));
             table.push(new Vec3(FIRE,   WIND,   THUNDER));
@@ -78,7 +80,7 @@ export class Element extends Component {
         contact: IPhysics2DContact | null
     ) {
         if(selfCollider.getComponent(Collider2D).group == 32
-            && selfCollider.node.getPosition().y < -100){//防止穿墙一半卡死
+            && selfCollider.node.getPosition().y < -50){//防止穿墙一半卡死
             // console.log(selfCollider.node.getPosition().y);
             selfCollider.getComponent(Collider2D).group = 2;
         }
@@ -136,14 +138,14 @@ export class Element extends Component {
                 otherCollider.node.destroy();
 
                 AudioSet.instance.playSound(Math.floor(Bucket.range(0, 2)) % 2, 1);
-                if(targetNumber == 4)Bucket.instance.attract(xx,yy,5000,2.5);
-                if(targetNumber == 7)Bucket.instance.attract(xx,yy,10000,1.5);
-                if(targetNumber == 11)Bucket.instance.blast(xx,yy,10000,1.5);
-                if(targetNumber == 10)Bucket.instance.blast(xx,yy,5000,2.5);
+                if(targetNumber == 4)Bucket.instance.attract(xx,yy,2500,2.5);
+                if(targetNumber == 7)Bucket.instance.attract(xx,yy,5000,1.5);
+                if(targetNumber == 11)Bucket.instance.blast(xx,yy,5000,1.5);
+                if(targetNumber == 10)Bucket.instance.blast(xx,yy,2500,2.5);
                 if(targetNumber == 12 || targetNumber == 13)Bucket.instance.attract(xx,yy,10000,2.5);
-                if(targetNumber == 8)Bucket.instance.fly(xx,yy,10000,2.5);
+                if(targetNumber == 8)Bucket.instance.fly(xx,yy,300,1.5);
 
-                Score.instance.addScore(targetLevel);
+                Score.instance.addScore(Math.min(2**targetLevel,256));
             }).start();
             /*if(targetNumber == 4){
                 Bucket.instance.attract(xx,yy,10000,1.5);
