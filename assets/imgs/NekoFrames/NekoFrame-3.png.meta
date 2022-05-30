@@ -2,7 +2,7 @@
   "ver": "1.0.23",
   "importer": "image",
   "imported": true,
-  "uuid": "9c2db688-8c7d-4afb-b91b-e4b8a0e948c0",
+  "uuid": "01a8eb32-f7a1-4aa5-bcfa-96a92229bb60",
   "files": [
     ".png",
     ".json"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "9c2db688-8c7d-4afb-b91b-e4b8a0e948c0@6c48a",
-      "displayName": "neko-frame3",
+      "uuid": "01a8eb32-f7a1-4aa5-bcfa-96a92229bb60@6c48a",
+      "displayName": "NekoFrame-3",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "9c2db688-8c7d-4afb-b91b-e4b8a0e948c0",
+        "imageUuidOrDatabaseUri": "01a8eb32-f7a1-4aa5-bcfa-96a92229bb60",
         "isUuid": true,
         "minfilter": "linear",
         "magfilter": "linear",
@@ -33,8 +33,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "9c2db688-8c7d-4afb-b91b-e4b8a0e948c0@f9941",
-      "displayName": "neko-frame3",
+      "uuid": "01a8eb32-f7a1-4aa5-bcfa-96a92229bb60@f9941",
+      "displayName": "NekoFrame-3",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -55,7 +55,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "9c2db688-8c7d-4afb-b91b-e4b8a0e948c0@6c48a",
+        "imageUuidOrDatabaseUri": "01a8eb32-f7a1-4aa5-bcfa-96a92229bb60@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.9",
@@ -70,6 +70,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "9c2db688-8c7d-4afb-b91b-e4b8a0e948c0@f9941"
+    "redirect": "01a8eb32-f7a1-4aa5-bcfa-96a92229bb60@f9941"
   }
 }

@@ -196,6 +196,14 @@ export class Bucket extends Component {
                 view.getVisibleSize().x / 2,
             y = this.targetElem.position.y;
 
+        if(x - this.slimeScale * this.targetElem.getComponent(UITransform).width / 2 <
+                -this.node.getComponent(UITransform).width / 2 ||
+            x + this.slimeScale * this.targetElem.getComponent(UITransform).width / 2 >
+                this.node.getComponent(UITransform).width / 2
+        ) {
+            return;
+        }
+
         let tweenDuration:number = 0.2;
         tween(this.targetElem).to(tweenDuration,
             {
